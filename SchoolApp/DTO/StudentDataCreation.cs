@@ -1,13 +1,9 @@
-﻿using SchoolApp.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SchoolApp.DTO
 {
-    public class ProfessorDataCreationDTO
+    public class StudentDataCreation
     {
-
-        public int SubjectId { get; set; }
-
         [Required]
         public int Document { get; set; }
         [Required]

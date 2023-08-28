@@ -16,6 +16,15 @@ namespace SchoolApp
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
@@ -28,7 +37,7 @@ namespace SchoolApp
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseRouting();
 

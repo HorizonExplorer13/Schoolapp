@@ -7,9 +7,6 @@ namespace SchoolApp.Entities
     {
         [Key]
         public int StudentId { get; set; }
-        [ForeignKey("subjects")]
-        public int SubjectId { get; set; }
-        public Subjects Subjects { get; set; }
         [Required]
         public int Document { get; set; }
         [Required]
@@ -21,6 +18,6 @@ namespace SchoolApp.Entities
         [Required]
         public string Direction { get; set; }
         [Required]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
     }
 }

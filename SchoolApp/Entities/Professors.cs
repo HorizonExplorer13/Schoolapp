@@ -22,7 +22,7 @@ namespace SchoolApp.Entities
         [Required]
         public string Direction { get; set; }
         [Required]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
     }
 }

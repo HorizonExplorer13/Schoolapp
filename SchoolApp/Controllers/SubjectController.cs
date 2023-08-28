@@ -15,8 +15,20 @@ namespace SchoolApp.Controllers
         {
             this.dbContext = dbContext;
         }
+
+        [HttpGet("Getlist")]
+        public async Task<IActionResult> Getlist()
+        {
+            var Subjectlist = await dbContext.subjects.ToListAsync();
+            if (Subjectlist != null)
+            {
+                return Ok(Subjectlist);
+            }
+            return BadRequest();
+        }
+
         [HttpPost("Create")]
-        public async Task<ActionResult> CreateSubject(SubjectDataCreationDTO subject)
+        public async Task<IActionResult> CreateSubject([FromBody] SubjectDataCreationDTO subject)
         {
             var Subjectdata = new Subjects
             {
@@ -30,6 +42,12 @@ namespace SchoolApp.Controllers
                 return BadRequest(result);
             }
             return Ok(result);
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateSubject()
+        {
+            return Ok();
         }
     }
 }

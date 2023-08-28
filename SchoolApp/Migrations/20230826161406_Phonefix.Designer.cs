@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolApp;
 
@@ -10,9 +11,11 @@ using SchoolApp;
 namespace SchoolApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230826161406_Phonefix")]
+    partial class Phonefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,46 +62,6 @@ namespace SchoolApp.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("professors");
-                });
-
-            modelBuilder.Entity("SchoolApp.Entities.Report", b =>
-                {
-                    b.Property<int>("ReportId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportId"));
-
-                    b.Property<string>("Aprobe")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Grade")
-                        .HasColumnType("real");
-
-                    b.Property<int>("ProfessorDocument")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProfessorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentDocument")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubjectName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReportId");
-
-                    b.ToTable("reports");
                 });
 
             modelBuilder.Entity("SchoolApp.Entities.StudentSubjects", b =>
@@ -152,9 +115,8 @@ namespace SchoolApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<string>("Surname")
                         .IsRequired()
