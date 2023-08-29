@@ -10,9 +10,9 @@ namespace SchoolApp.Controllers
     {
         private readonly AppDbContext dbContext;
 
-        public AcademicReport(AppDbContext dbContext) 
-        { 
-            this.dbContext = dbContext; 
+        public AcademicReport(AppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
         }
         [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport()
@@ -24,5 +24,8 @@ namespace SchoolApp.Controllers
             }
             return Ok(report);
         }
+
+      
+        
     }
 }

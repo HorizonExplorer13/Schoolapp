@@ -57,6 +57,11 @@ namespace SchoolApp.Controllers
             }
             return Ok(newstudent);
         }
-
+        [HttpPut]
+        [HttpDelete("Delete/{studentId}")]
+        public async Task<IActionResult> Deletestudent(int studentId)
+        {
+            return Ok();
+        }
     }
 }

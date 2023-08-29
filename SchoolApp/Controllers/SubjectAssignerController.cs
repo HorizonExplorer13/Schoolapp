@@ -46,7 +46,7 @@ namespace SchoolApp.Controllers
                     if (result != 0)
                     {
 
-                    await postinreport();
+                    await PostInReport();
                     return Ok(Enrolled);
                     
                     }
@@ -70,7 +70,7 @@ namespace SchoolApp.Controllers
         }
 
 
-        private async Task postinreport()
+        private async Task PostInReport()
         {
             var reportdata = await dbContext.studentSubjects.Join(dbContext.professors,
                 studentSubjects => studentSubjects.SubjectId,

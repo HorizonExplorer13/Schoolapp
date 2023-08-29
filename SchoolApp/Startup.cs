@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SchoolApp.ReportServices;
 
 namespace SchoolApp
 {
@@ -13,6 +14,7 @@ namespace SchoolApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IReportService, ReportService>();
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
