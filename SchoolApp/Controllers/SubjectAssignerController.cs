@@ -46,7 +46,6 @@ namespace SchoolApp.Controllers
                     if (result != 0)
                     {
 
-                    await PostInReport();
                     return Ok(Enrolled);
                     
                     }
@@ -70,34 +69,34 @@ namespace SchoolApp.Controllers
         }
 
 
-        private async Task PostInReport()
-        {
-            var reportdata = await dbContext.studentSubjects.Join(dbContext.professors,
-                studentSubjects => studentSubjects.SubjectId,
-                proffesor => proffesor.SubjectId,
-                (studentSubjects,proffesor)=>new Report
-                {
-                    Year = studentSubjects.Year,
-                    StudentDocument = studentSubjects.Students.Document,
-                    StudentName =studentSubjects.Students.Name,
-                    Code=studentSubjects.Subjects.Code,
-                    SubjectName=studentSubjects.Subjects.Name,
-                    ProfessorDocument=proffesor.Document,
-                    ProfessorName=proffesor.Name,
-                    Grade=studentSubjects.Grade,
-                    Aprobe = studentSubjects.Grade > 3.0? "yes":"no"
+        //private async Task PostInReport()
+        //{
+        //    var reportdata = await dbContext.studentSubjects.Join(dbContext.professors,
+        //        studentSubjects => studentSubjects.SubjectId,
+        //        proffesor => proffesor.SubjectId,
+        //        (studentSubjects,proffesor)=>new Report
+        //        {
+        //            //Year = studentSubjects.Year,
+        //            //StudentDocument = studentSubjects.Students.Document,
+        //            //StudentName =studentSubjects.Students.Name,
+        //            //Code=studentSubjects.Subjects.Code,
+        //            //SubjectName=studentSubjects.Subjects.Name,
+        //            //ProfessorDocument=proffesor.Document,
+        //            //ProfessorName=proffesor.Name,
+        //            //Grade=studentSubjects.Grade,
+        //            //Aprobe = studentSubjects.Grade > 3.0? "yes":"no"
                     
-                }).ToListAsync();
-            foreach (var report in reportdata)
-            {
-                dbContext.reports.Add(report);
-            }
-            var result = await dbContext.SaveChangesAsync();
-            if (result != null)
-            {
-                Console.WriteLine("report succesfuly create");
-            }
-            Console.WriteLine("there was an error");
+        //        }).ToListAsync();
+        //    foreach (var report in reportdata)
+        //    {
+        //        dbContext.reports.Add(report);
+        //    }
+        //    var result = await dbContext.SaveChangesAsync();
+        //    if (result != null)
+        //    {
+        //        Console.WriteLine("report succesfuly create");
+        //    }
+        //    Console.WriteLine("there was an error");
            
          
         }
@@ -105,4 +104,4 @@ namespace SchoolApp.Controllers
             
 
     }
-}
+

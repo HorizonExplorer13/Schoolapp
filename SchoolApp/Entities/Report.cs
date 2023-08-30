@@ -6,14 +6,19 @@ namespace SchoolApp.Entities
     {
         [Key]
         public int ReportId { get; set; }
-        public int Year { get; set; }
-        public int StudentDocument { get; set; }
-        public string StudentName { get; set; }
-        public string Code { get; set; }
-        public string SubjectName { get; set; }
-        public int ProfessorDocument { get; set; }
-        public string ProfessorName { get; set; }
-        public float Grade { get; set; }
+
+        public int StudentSubjectId { get; set; } 
+        public StudentSubjects studentSubjects { get; set; }
+
+        public int StudentId { get; set; }
+
+        public Students Students { get; set; }
+
+        public int SubjectId { get; set; }
+        public Subjects Subjects { get; set; }
+
+        public int ProfessorId { get; set; }
+        public Professors Professors { get; set; }
         public string Aprobe { get; set; }
 
     }

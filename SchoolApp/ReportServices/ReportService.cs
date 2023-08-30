@@ -23,15 +23,15 @@ namespace SchoolApp.ReportServices
                     professor => professor.SubjectId,
                     (studentSubjects, professor) => new Report
                     {
-                        Year = studentSubjects.Year,
-                        StudentDocument = studentSubjects.Students.Document,
-                        StudentName = studentSubjects.Students.Name,
-                        Code = studentSubjects.Subjects.Code,
-                        SubjectName = studentSubjects.Subjects.Name,
-                        ProfessorDocument = professor.Document,
-                        ProfessorName = professor.Name,
-                        Grade = studentSubjects.Grade,
-                        Aprobe = studentSubjects.Grade > 3.0 ? "yes" : "no"
+                        //Year = studentSubjects.Year,
+                        //StudentDocument = studentSubjects.Students.Document,
+                        //StudentName = studentSubjects.Students.Name,
+                        //Code = studentSubjects.Subjects.Code,
+                        //SubjectName = studentSubjects.Subjects.Name,
+                        //ProfessorDocument = professor.Document,
+                        //ProfessorName = professor.Name,
+                        //Grade = studentSubjects.Grade,
+                        //Aprobe = studentSubjects.Grade > 3.0 ? "yes" : "no"
                     })
                 .ToListAsync();
 

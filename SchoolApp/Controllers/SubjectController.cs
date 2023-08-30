@@ -11,12 +11,10 @@ namespace SchoolApp.Controllers
     public class SubjectController :ControllerBase
     {
         private readonly AppDbContext dbContext;
-        private readonly IReportService reportService;
 
-        public SubjectController(AppDbContext dbContext,IReportService reportService) 
+        public SubjectController(AppDbContext dbContext) 
         {
             this.dbContext = dbContext;
-            this.reportService = reportService;
         }
 
         [HttpGet("Getlist")]
@@ -44,41 +42,50 @@ namespace SchoolApp.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> CreateSubject([FromBody] SubjectDataCreationDTO subject)
         {
-            var Subjectdata = new Subjects
-            {
-                Code = subject.Code,
-                Name = subject.Name,
-            };
-            dbContext.subjects.Add(Subjectdata);
-            var result = await dbContext.SaveChangesAsync();
-            if(result is 0)
-            {
-                return BadRequest(result);
+            var subjects = await dbContext.subjects.FirstOrDefaultAsync(p => p.Code == subject.Code && p.Name == subject.Name);
+            if (subjects == null)
+            {  
+                var Subjectdata = new Subjects
+                {
+                    Code = subject.Code,
+                    Name = subject.Name,
+                };
+                dbContext.subjects.Add(Subjectdata);
+                var result = await dbContext.SaveChangesAsync();
+                if (result is 0)
+                {
+                    return BadRequest(result);
+                }
+                return Ok(result);
             }
-            return Ok(result);
+            return BadRequest("this subject already exist");
         }
+     
 
         [HttpPut("Update/{subjectId}")]
         public async Task<IActionResult> UpdateSubject(int subjectId, [FromBody] SubjectDataUpdateDTO Subject)
         {
-            
-            var subject = await dbContext.subjects.FindAsync(subjectId);
-            if(subject == null)
+            var subjects = await dbContext.subjects.FirstOrDefaultAsync(p => p.Code == Subject.Code && p.Name == Subject.Name);
+            if (subjects == null)
             {
-                return NotFound(subjectId);
-            }
-            subject.Code = Subject.Code;
-            subject.Name = Subject.Name;
+                var subject = await dbContext.subjects.FindAsync(subjectId);
+                if (subject == null)
+                {
+                    return NotFound(subjectId);
+                }
+                subject.Code = Subject.Code;
+                subject.Name = Subject.Name;
 
-            dbContext.Entry(subject).State = EntityState.Modified;
-            var result = await dbContext.SaveChangesAsync();
-            if(result != 0)
-            {
-                await reportService.UpdateReportAfterUpdate();
-                return Ok(subject);
-                
+                dbContext.Entry(subject).State = EntityState.Modified;
+                var result = await dbContext.SaveChangesAsync();
+                if (result != 0)
+                {
+                    return Ok(subject);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            return BadRequest("there is already a subject with this info");
+        
         }
         [HttpDelete("Delete/{subjectId}")]
         public async Task<IActionResult> DeleteSubject(int subjectId)

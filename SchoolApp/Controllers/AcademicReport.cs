@@ -17,15 +17,13 @@ namespace SchoolApp.Controllers
         [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport()
         {
-            var report = await dbContext.reports.ToListAsync();
+            var report = await dbContext.ReportView.ToListAsync();
             if (report == null)
             {
                 return NotFound();
             }
-            return Ok(report);
-        }
 
-      
-        
+            return Ok(report);
+        }     
     }
 }
